@@ -7,18 +7,20 @@ const useStage = (piece, isStartedGame) => {
 
 	const [initialStage, setInitialStage] = useState(createStage())
 	const [stage, setStage] = useState(initialStage)
+	const [clearedRows, setClearedRows] = useState(0)
 
-
-
-	const sweepRows = initialStage =>
-		initialStage.reduce((ack, row) => {
+	const sweepRows = initialStage =>{
+		setClearedRows(0)
+		return initialStage.reduce((ack, row) => {
 			if (row.findIndex(cell => cell === 0) === -1) {
+				setClearedRows(prev => prev + 1)
 				ack.unshift(new Array(initialStage[0].length).fill(0));
 				return ack;
 			}
 			ack.push(row);
 			return ack;
 		}, [])
+	}
 
 	useEffect(() => {
 		const updateStage = () => {
@@ -44,7 +46,7 @@ const useStage = (piece, isStartedGame) => {
 		initialStage
 	])
 
-	return [stage, initialStage, setInitialStage, sweepRows]
+	return [stage, initialStage, setInitialStage, sweepRows, clearedRows]
 }
 
 export default useStage

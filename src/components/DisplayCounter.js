@@ -25,22 +25,28 @@ margin: 10px 0 20px 5px;
 
 
 const DisplayDetailsCounter = ({ label, counter, isDisabled, piece, isStartedGame }) => {
-	const arrNumbersOfCounter = ['00000', '00000', ''];
+	const arrNumbersOfCounter = ['000000', '00000', ''];
+
+const zeroes = (num) => {
+	const numOfCounter = counter.toString().length;
+	let point = arrNumbersOfCounter[num].slice(numOfCounter);
+	return point
+}
+
 	let point = '';
 	switch (label) {
-		case 'Point': point = arrNumbersOfCounter[0];
+		case 'Point':
+			point = zeroes(0);
 			break;
-		case 'Cleans': point = arrNumbersOfCounter[1];
-			break;
-		case 'Level': point = arrNumbersOfCounter[2];
+		case 'Cleans': point = zeroes(1);
 			break;
 		default: point = ''
 	}
-
+	
 	return (
 		<StyledDisplayDetailsCounter>
 			<div className='pl-1 pb-1'>{label}</div>
-			{isDisabled ? <div className='pr-1'>{point}<span>{+counter}</span></div> : <DisplayDetailsNextPiece piece={piece} isStartedGame={isStartedGame} />}
+			{isDisabled ? <div className='pr-1'>{point}<span>{counter}</span></div> : <DisplayDetailsNextPiece piece={piece} isStartedGame={isStartedGame} />}
 		</StyledDisplayDetailsCounter>
 	)
 }

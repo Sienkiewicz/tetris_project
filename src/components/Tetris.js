@@ -11,6 +11,7 @@ import {
 } from '@bootstrap-styled/v4';
 import Button from '@bootstrap-styled/v4/lib/Button'
 import DisplayDetailsCounter from './DisplayCounter'
+import { useGameStatus } from '../hooks/useGameStatus'
 
 const Tetris = () => {
 	const [dropTime, setDropTime] = useState(null)
@@ -18,7 +19,8 @@ const Tetris = () => {
 	const [isPaused, setIsPaused] = useState(false)
 
 	const [bit, updateBitPosition, resetPiece, rotatePiece, nextBit] = usePiece()
-	const [stage, initialStage, setInitialStage, sweepRows] = useStage(bit, isStartedGame)
+	const [stage, initialStage, setInitialStage, sweepRows, clearedRows] = useStage(bit, isStartedGame)
+	const [level, cleanRows, points, setLevel, setPoints, setCleanRows] = useGameStatus(clearedRows, setDropTime)
 
 
 	const movePiece = (dir) => {
@@ -27,8 +29,14 @@ const Tetris = () => {
 		}
 	}
 
-	const keyUp = () => {
-		setDropTime(1000)
+	const keyUp = ({ keyCode }) => {
+		if (isStartedGame) {
+			if (keyCode === 40) {
+				if (level > 1) {
+					setDropTime(1000 / level * 1.5)
+				} else setDropTime(1000)
+			}
+		}
 	}
 
 	const movePieceDown = () => {
@@ -53,6 +61,7 @@ const Tetris = () => {
 
 	useInterval(() => {
 		drop();
+		console.log(dropTime);
 	}, dropTime);
 
 	const move = ({ keyCode }) => {
@@ -73,13 +82,12 @@ const Tetris = () => {
 		}
 	}
 
-
 	const startGame = () => {
 		setIsStartedGame(true);
 		resetPiece(isStartedGame);
 		setDropTime(1000);
 		createStage();
-		
+
 	}
 
 	const stopGame = () => {
@@ -90,6 +98,10 @@ const Tetris = () => {
 		setIsStartedGame(false);
 		setDropTime(null);
 		setInitialStage(createStage());
+		setLevel(1);
+		setPoints(0);
+		setCleanRows(0)
+
 	}
 
 	return (
@@ -102,9 +114,9 @@ const Tetris = () => {
 			<StyledDisplay>
 				<Stage stage={stage} />
 				<div className='styledDisplay__container'>
-					<DisplayDetailsCounter label='Point' counter='' isDisabled={true} />
-					<DisplayDetailsCounter label='Cleans' counter='' isDisabled={true} />
-					<DisplayDetailsCounter label='Level' counter='' isDisabled={true} />
+					<DisplayDetailsCounter label='Point' counter={points} isDisabled={true} />
+					<DisplayDetailsCounter label='Cleans' counter={cleanRows} isDisabled={true} />
+					<DisplayDetailsCounter label='Level' counter={level} isDisabled={true} />
 					<DisplayDetailsCounter label='Next' isDisabled={false} piece={nextBit} isStartedGame={isStartedGame} />
 				</div>
 			</StyledDisplay>
