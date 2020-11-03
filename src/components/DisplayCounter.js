@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import DisplayDetailsNextPiece from './DisplayDetailsNextPiece';
 
@@ -27,11 +27,12 @@ margin: 10px 0 20px 5px;
 const DisplayDetailsCounter = ({ label, counter, isDisabled, piece, isStartedGame }) => {
 	const arrNumbersOfCounter = ['000000', '00000', ''];
 
-const zeroes = (num) => {
-	const numOfCounter = counter.toString().length;
-	let point = arrNumbersOfCounter[num].slice(numOfCounter);
-	return point
-}
+	const zeroes = (num) => {
+		const numOfCounter = counter.toString().length;
+		let point = arrNumbersOfCounter[num].slice(numOfCounter);
+		return point
+	}
+
 
 	let point = '';
 	switch (label) {
@@ -42,7 +43,7 @@ const zeroes = (num) => {
 			break;
 		default: point = ''
 	}
-	
+
 	return (
 		<StyledDisplayDetailsCounter>
 			<div className='pl-1 pb-1'>{label}</div>
@@ -51,4 +52,4 @@ const zeroes = (num) => {
 	)
 }
 
-export default DisplayDetailsCounter
+export default memo(DisplayDetailsCounter)

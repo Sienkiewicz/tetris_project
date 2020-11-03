@@ -15,14 +15,14 @@ export const useGameStatus = (clearedRows, setDropTime) => {
 			setPoints(prev => prev + lineScore[clearedRows - 1])
 		}
 	}, [clearedRows])
-
+	
 
 	useEffect(() => {
 		calcScore();
-	}, [clearedRows])
+	}, [clearedRows, calcScore])
 
 	useEffect(() => {
-		if (cleanRows >= level) {
+		if (cleanRows >= level*10) {
 			setLevel(prev => prev + 1);
 			setDropTime(1000 / (level + 1) * 1.5)
 		}

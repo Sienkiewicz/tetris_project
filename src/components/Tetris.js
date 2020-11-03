@@ -1,26 +1,29 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { usePiece } from '../hooks/usePiece'
 import useStage from '../hooks/useStage'
 import Stage from './Stage'
 import StyledDisplay from './Styled/StyledDisplay'
 import { StyledWrapper } from './Styled/StyledTetris'
 import { collided, createStage } from './../helpers'
-import { useInterval } from '../hooks/useInterval'
+import { useAnimationFrame } from '../hooks/useInterval'
 import {
 	Row,
 } from '@bootstrap-styled/v4';
 import Button from '@bootstrap-styled/v4/lib/Button'
 import DisplayDetailsCounter from './DisplayCounter'
 import { useGameStatus } from '../hooks/useGameStatus'
+import { useTgm3Randomizer } from '../tetramino'
 
 const Tetris = () => {
 	const [dropTime, setDropTime] = useState(null)
 	const [isStartedGame, setIsStartedGame] = useState(false)
 	const [isPaused, setIsPaused] = useState(false)
 
-	const [bit, updateBitPosition, resetPiece, rotatePiece, nextBit] = usePiece()
+	const [randTetramino, resetPool] = useTgm3Randomizer()
+	const [bit, updateBitPosition, resetPiece, rotatePiece, nextBit] = usePiece(randTetramino, isStartedGame)
 	const [stage, initialStage, setInitialStage, sweepRows, clearedRows] = useStage(bit, isStartedGame)
 	const [level, cleanRows, points, setLevel, setPoints, setCleanRows] = useGameStatus(clearedRows, setDropTime)
+	const [stopUseAnimationRequest, isThrow, toggleSetThrow] = useAnimationFrame(dropTime)
 
 
 	const movePiece = (dir) => {
@@ -29,19 +32,39 @@ const Tetris = () => {
 		}
 	}
 
+	const handlerTimeDrop = () => {
+		toggleSetThrow()
+		if (level > 1) {
+			setDropTime(1000 / level * 1.5)
+		} else setDropTime(1000)
+	}
+
 	const keyUp = ({ keyCode }) => {
 		if (isStartedGame) {
 			if (keyCode === 40) {
-				if (level > 1) {
-					setDropTime(1000 / level * 1.5)
-				} else setDropTime(1000)
+				handlerTimeDrop()
 			}
 		}
 	}
 
 	const movePieceDown = () => {
-		drop();
-		setDropTime(null)
+		if (isStartedGame) {
+			if (dropTime !== 60) {
+				toggleSetThrow()
+				setDropTime(60)
+			}
+		}
+	}
+
+	const resetGame = () => {
+		setIsStartedGame(false);
+		setDropTime(null);
+		setInitialStage(createStage());
+		setLevel(1);
+		setPoints(0);
+		setCleanRows(0)
+		stopUseAnimationRequest();
+		resetPool()
 	}
 
 	const drop = () => {
@@ -50,6 +73,7 @@ const Tetris = () => {
 		} else {
 			setInitialStage(sweepRows(stage))
 			resetPiece(isStartedGame);
+			handlerTimeDrop();
 			if (bit.pos.y < 4) {
 				resetGame()
 				console.log('GAME OVER');
@@ -58,11 +82,15 @@ const Tetris = () => {
 		}
 	}
 
-
-	useInterval(() => {
-		drop();
-		console.log(dropTime);
-	}, dropTime);
+	if (isThrow) {
+		if (dropTime != null) {
+			toggleSetThrow()
+			drop();
+			if (dropTime === 60) {
+				setPoints(prev => prev + 1)
+			}
+		}
+	}
 
 	const move = ({ keyCode }) => {
 		switch (keyCode) {
@@ -87,22 +115,13 @@ const Tetris = () => {
 		resetPiece(isStartedGame);
 		setDropTime(1000);
 		createStage();
-
 	}
 
 	const stopGame = () => {
-		setIsPaused(!isPaused)
+		// setIsPaused(!isPaused)
 	}
 
-	const resetGame = () => {
-		setIsStartedGame(false);
-		setDropTime(null);
-		setInitialStage(createStage());
-		setLevel(1);
-		setPoints(0);
-		setCleanRows(0)
 
-	}
 
 	return (
 		<StyledWrapper

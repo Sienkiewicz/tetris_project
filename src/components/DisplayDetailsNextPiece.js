@@ -25,9 +25,8 @@ const DisplayDetailsNextPiece = ({ piece, isStartedGame }) => {
 		[0, 0, 0, 0],
 	]
 	const [prevPiece, setPrevPiece] = useState(stage)
-
+	
 	useEffect(() => {
-
 		const updateStage = () => {
 			let newStage = stage.map(row => row.map(cell => cell))
 

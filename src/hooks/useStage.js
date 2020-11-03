@@ -2,26 +2,24 @@ import { useEffect, useState } from "react"
 import { createStage } from "../helpers"
 
 
-
-const useStage = (piece, isStartedGame) => {
+const useStage = ( piece, isStartedGame) => {
 
 	const [initialStage, setInitialStage] = useState(createStage())
 	const [stage, setStage] = useState(initialStage)
 	const [clearedRows, setClearedRows] = useState(0)
-
-	const sweepRows = initialStage =>{
+	
+	const sweepRows = stage =>{
 		setClearedRows(0)
-		return initialStage.reduce((ack, row) => {
+		return stage.reduce((ack, row) => {
 			if (row.findIndex(cell => cell === 0) === -1) {
 				setClearedRows(prev => prev + 1)
-				ack.unshift(new Array(initialStage[0].length).fill(0));
+				ack.unshift(new Array(stage[0].length).fill(0));
 				return ack;
 			}
 			ack.push(row);
 			return ack;
 		}, [])
 	}
-
 	useEffect(() => {
 		const updateStage = () => {
 			let newStage = initialStage.map(row => row.map(cell => cell))
@@ -42,7 +40,7 @@ const useStage = (piece, isStartedGame) => {
 		piece.matrix,
 		piece.pos.x,
 		piece.pos.y,
-		isStartedGame,
+		// isStartedGame,
 		initialStage
 	])
 

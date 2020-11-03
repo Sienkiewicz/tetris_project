@@ -1,12 +1,16 @@
+import { useEffect } from "react"
 import { useState } from "react"
 import { collided } from "../helpers"
-import { randomTetromino } from "../tetramino"
 
-const piece = randomTetromino()
 
-export const usePiece = () => {
-	const [bit, setBit] = useState(piece)
+export const usePiece = (randTetramino, isStartedGame) => {
+
+	const [bit, setBit] = useState({
+		matrix: [[0, 0, 0]],
+		pos: { x: 0, y: 0 },
+	})
 	const [nextBit, setNextBit] = useState([])
+	const [toggleBit, seToggleBit] = useState(false)
 
 	const rotate = (piece, dir) => {
 		const mtrx = piece.matrix.map((_, i) => piece.matrix.map(column => column[i]))
@@ -34,12 +38,15 @@ export const usePiece = () => {
 		setBit(clonedPiece)
 	}
 
+
 	const updateBitPosition = ({ x, y }) => {
 		setBit(prev => ({
 			...prev,
 			pos: { x: (prev.pos.x + x), y: (prev.pos.y + y) }
 		}))
+
 	}
+
 
 	const randomRotateFigure = figure => {
 		let mtrx = JSON.parse(JSON.stringify(figure))
@@ -52,7 +59,7 @@ export const usePiece = () => {
 
 		const offset = arr =>
 			arr.reduce((ack, row) => {
-				if (row.findIndex(cell => cell === 1) === -1) {
+				if (row.findIndex(cell => cell !== 0) === -1) {
 					++ack;
 					return ack;
 				}
@@ -66,12 +73,21 @@ export const usePiece = () => {
 		return mtrx
 	}
 
-	const resetPiece = (isStartedGame) => {
+
+	const resetPiece = () => {
 		if (isStartedGame) {
 			setBit(randomRotateFigure(nextBit));
-		} else setBit(randomRotateFigure(randomTetromino()));
-		setNextBit(randomTetromino());
+		} else
+		setBit(randomRotateFigure(randTetramino()));
+		seToggleBit(toggleBit => !toggleBit)
 	}
+	
+	useEffect(() => {
+		if (isStartedGame) {
+			setNextBit(randTetramino())
+		}
+	}, [toggleBit])
+
 
 
 	return [bit, updateBitPosition, resetPiece, rotatePiece, nextBit]
