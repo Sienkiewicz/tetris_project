@@ -6,6 +6,7 @@ import DisplayDetailsNextPiece from './DisplayDetailsNextPiece';
 export const StyledDisplayDetailsCounter = styled.div`
 box-sizing: border-box;
 margin: 10px 0 20px 5px;
+width: 120px;
 & :first-child{
 	text-align: left;
 	font-family:  Roboto, regular;
