@@ -5,21 +5,21 @@ import styled from 'styled-components'
 
 export const StyledStageWrapper = styled.div`
 border: 2px solid #333;
-height: 409px;
+height: 345px;
 display: flex;
-max-width: 50vw;
-min-width: 50vw;
+max-width: 160px;
+min-width: 160px;
 align-items: flex-end;
 overflow: hidden;
 
 @media only screen and (min-width: 800px) {
-	height: 609px;
+	height: 345px;
 	  grid-template-rows: repeat(
     ${ props => props.height },
-    calc((30vw - 15px) / ${ props => props.width })
+    calc(160px / ${ props => props.width })
   );
- max-width: 20vw;
- min-width: 20vw;
+ max-width: 160px;
+ min-width: 160px;
 }  
 
 `

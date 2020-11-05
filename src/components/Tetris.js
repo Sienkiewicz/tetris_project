@@ -13,6 +13,10 @@ import Button from '@bootstrap-styled/v4/lib/Button'
 import DisplayDetailsCounter from './DisplayCounter'
 import { useGameStatus } from '../hooks/useGameStatus'
 import { useTgm3Randomizer } from '../tetramino'
+import Col from '@bootstrap-styled/v4/lib/Col'
+import StyledButton from './helpers/Button'
+import Container from '@bootstrap-styled/v4/lib/Container'
+import Small from '@bootstrap-styled/v4/lib/Small'
 
 const Tetris = () => {
 	const [dropTime, setDropTime] = useState(null)
@@ -44,6 +48,11 @@ const Tetris = () => {
 			if (keyCode === 40) {
 				handlerTimeDrop()
 			}
+		}
+	}
+	const cancelMovePieceDown = () => {
+		if (isStartedGame) {
+			handlerTimeDrop()
 		}
 	}
 
@@ -139,20 +148,102 @@ const Tetris = () => {
 					<DisplayDetailsCounter label='Next' isDisabled={false} piece={nextBit} isStartedGame={isStartedGame} />
 				</div>
 			</StyledDisplay>
-			<Row className='mx-auto'>
-				<Button
-					className='m-1'
-					onClick={startGame}
-				>start</Button>
-				<Button
-					className='m-1'
-					onClick={stopGame}
-				>stop</Button>
-				<Button
-					className='m-1'
-					onClick={resetGame}
-				>reset</Button>
+			<Row className='mx-auto my-2 '>
+				<Col className='mx-3 d-flex flex-column'>
+					<Small>start</Small>
+					<StyledButton
+						width='25px'
+						role='button'
+						tabIndex='0'
+						className='m-1'
+						onClick={startGame}
+					></StyledButton>
+				</Col>
+				<Col className='mx-3 d-flex flex-column'>
+					<Small>reset</Small>
+					<StyledButton
+						width='25px'
+						role='button'
+						tabIndex='0'
+						className='m-1'
+						onClick={resetGame}
+					></StyledButton>
+				</Col>
 			</Row>
+			<Row className='mx-auto d-flex'>
+				<Col className='d-flex flex-column mr-4'>
+					<Row className='d-flex justify-content-center'>
+						<StyledButton
+							width='40px'
+							role='button'
+							tabIndex='0'
+							className='m-1 '
+						>
+						</StyledButton>
+					</Row>
+					<Container className='d-flex'>
+						<Col className='mr-4'>
+							<Row className='d-flex justify-content-center'>
+								<StyledButton
+									width='40px'
+									role='button'
+									tabIndex='0'
+									className='m-1 d-flex align-items-center justify-content-center'
+									// onClick={() => movePiece(-1)}
+									onTouchStart={() => movePiece(-1)}
+								>
+									<i className="fas fa-arrow-left text-white"></i>
+								</StyledButton>
+							</Row>
+						</Col>
+						<Col className='ml-4'>
+							<Row className='d-flex justify-content-center'>
+								<StyledButton
+									width='40px'
+									role='button'
+									tabIndex='0'
+									className='m-1 d-flex align-items-center justify-content-center'
+									// onClick={() => movePiece(1)}
+									onTouchStart={() => movePiece(1)}
+								>
+									<i className="fas fa-arrow-right text-white"></i>
+								</StyledButton>
+							</Row>
+						</Col>
+					</Container>
+					<Row className='d-flex justify-content-center'>
+						<StyledButton
+							width='40px'
+							role='button'
+							tabIndex='0'
+							className='m-1 d-flex align-items-center justify-content-center'
+							// onClick={() => movePieceDown()}
+							onTouchStart={() => movePieceDown()}
+							onTouchEnd={() => cancelMovePieceDown()}
+						>
+							<i className="fas fa-arrow-down text-white"></i>
+						</StyledButton>
+					</Row>
+				</Col>
+				<Col className='d-flex align-items-center ml-4'>
+					<Container>
+						<Small className='d-flex justify-content-center'>
+							rotate
+							</Small>
+						<Row className='d-flex justify-content-center'>
+							<StyledButton
+								width='60px'
+								role='button'
+								tabIndex='0'
+								className='m-1'
+								// onClick={() => rotatePiece(initialStage, 1)}
+								onTouchStart={() => rotatePiece(initialStage, 1)}
+							></StyledButton>
+						</Row>
+					</Container>
+				</Col>
+			</Row>
+
 		</StyledWrapper>
 	)
 }

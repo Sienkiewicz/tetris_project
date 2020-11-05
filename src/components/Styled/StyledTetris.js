@@ -6,5 +6,7 @@ height: 100vh;
 display: flex;
 flex-direction: column;
 overflow: hidden;
+padding-top: 10px;
+align-items: center;
 
 `

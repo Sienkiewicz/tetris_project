@@ -4,7 +4,7 @@ const StyledStage = styled.div`
   display: grid;
   grid-template-rows: repeat(
     ${ props => props.height },
-    calc((50vw - 15px) / ${ props => props.width })
+    calc(160px / ${ props => props.width })
   );
   grid-template-columns: repeat(${ props => props.width }, 1fr);
   grid-gap: 1px;
@@ -16,10 +16,10 @@ const StyledStage = styled.div`
 @media only screen and (min-width: 800px) {
 	  grid-template-rows: repeat(
     ${ props => props.height },
-    calc((20vw - 15px) / ${ props => props.width })
+    calc(160px / ${ props => props.width })
   );
- max-width: 20vw;
- min-width: 20vw;
+ max-width: 160px;
+ min-width: 160px;
 }  
 `
 
