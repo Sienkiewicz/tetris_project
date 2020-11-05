@@ -174,7 +174,6 @@ const Tetris = () => {
 				</Col>
 			</Row>
 			{/* Control Buttons */}
-			<Container className='container-fluid'>
 				<Row className='d-flex'>
 					<Col className='d-flex flex-column mr-4'>
 						<Row className='d-flex justify-content-center'>
@@ -244,7 +243,6 @@ const Tetris = () => {
 						</Container>
 					</Col>
 				</Row>
-			</Container>
 		<Container className='container-fluid'>
 				<Row className=' d-flex justify-content-center text-info '>
 					<div className='my-1'>You will have more fun with control of Tetris when you try it on PC</div>

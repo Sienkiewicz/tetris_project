@@ -11,13 +11,16 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+	 "eject": "react-scripts eject",
+	//  "build": "babel src -d lib",
+   //  "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
