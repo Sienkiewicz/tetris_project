@@ -9,4 +9,8 @@ overflow: hidden;
 padding-top: 10px;
 align-items: center;
 
+@media only screen and (min-width: 600px) {
+padding-top: 40px;
+}  
+
 `

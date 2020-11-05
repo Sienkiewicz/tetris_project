@@ -16,10 +16,19 @@ overflow: hidden;
 	height: 345px;
 	  grid-template-rows: repeat(
     ${ props => props.height },
-    calc(160px / ${ props => props.width })
+    calc(170px / ${ props => props.width })
   );
  max-width: 160px;
  min-width: 160px;
+}  
+@media only screen and (max-width: 320px) {
+	height: 305px;
+	  grid-template-rows: repeat(
+    ${ props => props.height },
+    calc(140px / ${ props => props.width })
+  );
+ max-width: 144px;
+ min-width: 144px;
 }  
 
 `

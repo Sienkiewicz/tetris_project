@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const StyledButton = styled.div`
 width: ${props => props.width};
 height: ${props => props.width};
-padding: 6px 0px;
 border-radius: calc(${props => props.width}/2);
 background-color: pink;
 border: 1px solid #012880;

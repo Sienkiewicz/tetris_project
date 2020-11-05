@@ -1,5 +1,5 @@
 export const widthOfStage = 10;
-export const heightOfStage = 23;
+export const heightOfStage = 24;
 
 export const createStage = () =>
 	Object.values(Array.from(Array(heightOfStage ), () => Array(widthOfStage).fill(0)))

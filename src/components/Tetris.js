@@ -17,10 +17,12 @@ import Col from '@bootstrap-styled/v4/lib/Col'
 import StyledButton from './helpers/Button'
 import Container from '@bootstrap-styled/v4/lib/Container'
 import Small from '@bootstrap-styled/v4/lib/Small'
+import { useEffect } from 'react'
 
 const Tetris = () => {
 	const [dropTime, setDropTime] = useState(null)
 	const [isStartedGame, setIsStartedGame] = useState(false)
+	const [isTouched, setIsTouched] = useState(false)
 	const [isPaused, setIsPaused] = useState(false)
 
 	const [randTetramino, resetPool] = useTgm3Randomizer()
@@ -120,16 +122,15 @@ const Tetris = () => {
 	}
 
 	const startGame = () => {
-		setIsStartedGame(true);
 		resetPiece(isStartedGame);
 		setDropTime(1000);
 		createStage();
+		setIsStartedGame(true);
 	}
 
 	const stopGame = () => {
 		// setIsPaused(!isPaused)
 	}
-
 
 
 	return (
@@ -157,6 +158,7 @@ const Tetris = () => {
 						tabIndex='0'
 						className='m-1'
 						onClick={startGame}
+					// onTouchStart={startGame}
 					></StyledButton>
 				</Col>
 				<Col className='mx-3 d-flex flex-column'>
@@ -167,83 +169,89 @@ const Tetris = () => {
 						tabIndex='0'
 						className='m-1'
 						onClick={resetGame}
+					// onTouchStart={resetGame}
 					></StyledButton>
 				</Col>
 			</Row>
-			<Row className='mx-auto d-flex'>
-				<Col className='d-flex flex-column mr-4'>
-					<Row className='d-flex justify-content-center'>
-						<StyledButton
-							width='40px'
-							role='button'
-							tabIndex='0'
-							className='m-1 '
-						>
-						</StyledButton>
-					</Row>
-					<Container className='d-flex'>
-						<Col className='mr-4'>
-							<Row className='d-flex justify-content-center'>
-								<StyledButton
-									width='40px'
-									role='button'
-									tabIndex='0'
-									className='m-1 d-flex align-items-center justify-content-center'
-									// onClick={() => movePiece(-1)}
-									onTouchStart={() => movePiece(-1)}
-								>
-									<i className="fas fa-arrow-left text-white"></i>
-								</StyledButton>
-							</Row>
-						</Col>
-						<Col className='ml-4'>
-							<Row className='d-flex justify-content-center'>
-								<StyledButton
-									width='40px'
-									role='button'
-									tabIndex='0'
-									className='m-1 d-flex align-items-center justify-content-center'
-									// onClick={() => movePiece(1)}
-									onTouchStart={() => movePiece(1)}
-								>
-									<i className="fas fa-arrow-right text-white"></i>
-								</StyledButton>
-							</Row>
-						</Col>
-					</Container>
-					<Row className='d-flex justify-content-center'>
-						<StyledButton
-							width='40px'
-							role='button'
-							tabIndex='0'
-							className='m-1 d-flex align-items-center justify-content-center'
-							// onClick={() => movePieceDown()}
-							onTouchStart={() => movePieceDown()}
-							onTouchEnd={() => cancelMovePieceDown()}
-						>
-							<i className="fas fa-arrow-down text-white"></i>
-						</StyledButton>
-					</Row>
-				</Col>
-				<Col className='d-flex align-items-center ml-4'>
-					<Container>
-						<Small className='d-flex justify-content-center'>
-							rotate
-							</Small>
+			{/* Control Buttons */}
+			<Container className='container-fluid'>
+				<Row className='d-flex'>
+					<Col className='d-flex flex-column mr-4'>
 						<Row className='d-flex justify-content-center'>
 							<StyledButton
-								width='60px'
+								width='40px'
 								role='button'
 								tabIndex='0'
-								className='m-1'
-								// onClick={() => rotatePiece(initialStage, 1)}
-								onTouchStart={() => rotatePiece(initialStage, 1)}
-							></StyledButton>
+								className='m-1 '
+							>
+							</StyledButton>
 						</Row>
-					</Container>
-				</Col>
-			</Row>
-
+						<Container className='d-flex'>
+							<Col className='mr-3'>
+								<Row className='d-flex justify-content-center'>
+									<StyledButton
+										width='40px'
+										role='button'
+										tabIndex='0'
+										className='m-1 d-flex align-items-center justify-content-center'
+										onTouchStart={() => movePiece(-1)}
+									>
+										<i className="fas fa-arrow-left text-white"></i>
+									</StyledButton>
+								</Row>
+							</Col>
+							<Col className='ml-3'>
+								<Row className='d-flex justify-content-center'>
+									<StyledButton
+										width='40px'
+										role='button'
+										tabIndex='0'
+										className='m-1 d-flex align-items-center justify-content-center'
+										onTouchStart={() => movePiece(1)}
+									>
+										<i className="fas fa-arrow-right text-white"></i>
+									</StyledButton>
+								</Row>
+							</Col>
+						</Container>
+						<Row className='d-flex justify-content-center'>
+							<StyledButton
+								width='40px'
+								role='button'
+								tabIndex='0'
+								className='m-1 d-flex align-items-center justify-content-center'
+								onTouchStart={() => movePieceDown()}
+								onTouchEnd={() => cancelMovePieceDown()}
+							>
+								<i className="fas fa-arrow-down text-white"></i>
+							</StyledButton>
+						</Row>
+					</Col>
+					<Col className='d-flex align-items-center'>
+						<Container>
+							<Small className='d-flex justify-content-center'>
+								rotate
+								</Small>
+							<Row className='d-flex justify-content-center'>
+								<StyledButton
+									width='60px'
+									role='button'
+									tabIndex='0'
+									className='m-1'
+									onTouchStart={() => rotatePiece(initialStage, 1)}
+								></StyledButton>
+							</Row>
+						</Container>
+					</Col>
+				</Row>
+			</Container>
+		<Container className='container-fluid'>
+				<Row className=' d-flex justify-content-center text-info '>
+					<div className='my-1'>You will have more fun with control of Tetris when you try it on PC</div>
+					<div className='w-100'></div>
+					<Small className=''>Use the arrow keys on the keyboard</Small>
+				</Row>
+		</Container>
 		</StyledWrapper>
 	)
 }

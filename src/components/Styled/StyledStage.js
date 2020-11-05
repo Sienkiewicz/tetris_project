@@ -21,6 +21,14 @@ const StyledStage = styled.div`
  max-width: 160px;
  min-width: 160px;
 }  
+@media only screen and (max-width: 320px) {
+	  grid-template-rows: repeat(
+    ${ props => props.height },
+    calc(140px / ${ props => props.width })
+  );
+ max-width: 140px;
+ min-width: 140px;
+}  
 `
 
 export default StyledStage;
