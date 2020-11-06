@@ -57,8 +57,8 @@ I recommend to use desktop because it's easy and convenient to use arrow keys on
 
 ## Future scope
 - change view of game (CSS)
-- build this game completely resposive and easy to use on every platform
-- add simple writing best score and ranking
+- make this game fully responsive and easy to use on any platform
+- add simple record of the best result and rating
 - login with gmail
 - add the next type of Tetris, where at the start the field will have partially filled rows, depending on the level.
 
