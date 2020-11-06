@@ -1,68 +1,64 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align='center'> BUILDING A TETRIS (PRACTICE)</h1>
 
-## Available Scripts
+![Title of profile](src\assets\image_for_MD\Title.png) <br>
 
-In the project directory, you can run:
+#### *tetris is a good opportunity to learn how to work with arrays, and I decided that I would build this game in React with React hooks and custom hooks* <br>
 
-### `yarn start`
+## [View a Demo](https://tetris-project-sienkiewicz.netlify.app/) 
+You will have more fun with control of Tetris when you try it on desktop computer.\
+Use the arrow keys on the keyboard
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+____________________________________________________________________
+## What stack?
+**- JAVASCRIPT**<br> 
+**- React**<br> 
+**- React-hooks**<br> 
+**- SASS**<br> 
+**- HTML5**<br> 
+**- BOOTSTRAP**<br> 
+**- STYLED-COMPONENTS**<br> 
+____________________________________________________________________
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Description
 
-### `yarn test`
+It's a cool game witch was created by Russian software engineer Alexey Pajitnov in 1984 when he has 16 years old on Pascal.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+My version of Tetris implemented by React.
 
-### `yarn build`
+It has the best randomization of all Tetris version - I took the logic from **Tetris: The Grand Master 3 — Terror-Instinct (2005)**.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The animation was created based on requestAnimationFrame, not setInterval.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+I've learned web development myself without any course or coaching so don't expect too much from the source code.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+____________________________________________________________________
 
-### `yarn eject`
+**CHANGING AVATAR**
+<br> 
+<br> 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Changing avatar](src\assets\image_for_MD\usability.gif) <br>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## About the project
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- build and rewrite the field, move and rotate the 'tetramino', counters - all logic was built on custom hooks.
+- the animation created by custom hook with requestAnimationFrame. Initially I used Den Abramov's custom hook with setInterval, but it was lagged, and I took another hook and rewrote it for myself. 
 
-## Learn More
+## How to play
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Press the start button and enjoy the game. You can move the 'tetramino' (figure) by pressing the arrow keys - left or right. You can also throw the 'tetramino' by pressing the down arrow key.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To rotate the 'tetramino', when it throwing, press up arrow on the keyboard.
 
-### Code Splitting
+When the row on the field is completely fill, it disappears and the 'Cleans' counter add 1 point. Level up every 10 rows.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+I recommend to use desktop because it's easy and convenient to use arrow keys on the keyboard. 
 
-### Analyzing the Bundle Size
+## Future scope
+- change view of game (CSS)
+- build this game completely resposive and easy to use on every platform
+- add simple writing best score and ranking
+- login with gmail
+- add the next type of Tetris, where at the start the field will have partially filled rows, depending on the level.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
