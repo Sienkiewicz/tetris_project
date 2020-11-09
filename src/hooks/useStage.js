@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { createStage } from "../helpers"
 
 
-const useStage = ( piece, isStartedGame) => {
+const useStage = (piece, isStartedGame) => {
 
-	const [initialStage, setInitialStage] = useState(createStage())
+	const [initialStage, setInitialStage] = useState(createStage)
 	const [stage, setStage] = useState(initialStage)
 	const [clearedRows, setClearedRows] = useState(0)
-	
-	const sweepRows = stage =>{
+
+	const sweepRows = stage => {
 		setClearedRows(0)
 		return stage.reduce((ack, row) => {
 			if (row.findIndex(cell => cell === 0) === -1) {
@@ -31,7 +31,6 @@ const useStage = ( piece, isStartedGame) => {
 					}
 				}))
 			}
-
 			return newStage
 		}
 
@@ -40,7 +39,6 @@ const useStage = ( piece, isStartedGame) => {
 		piece.matrix,
 		piece.pos.x,
 		piece.pos.y,
-		// isStartedGame,
 		initialStage
 	])
 
