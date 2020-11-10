@@ -1,6 +1,7 @@
 <h1 align='center'> BUILDING A TETRIS (PRACTICE)</h1>
 
-![Title of profile](src\assets\image_for_MD\Title.png) <br>
+
+![Title](src/assets/image_for_MD/Title.png) <br>
 
 #### *tetris is a good opportunity to learn how to work with arrays, and I decided that I would build this game in React with React hooks and custom hooks* <br>
 
@@ -37,7 +38,7 @@ ____________________________________________________________________
 <br> 
 <br> 
 
-![Changing avatar](src\assets\image_for_MD\usability.gif) <br>
+![how it works](src/assets/image_for_MD/usability.gif) <br>
 
 
 ## About the project
