@@ -245,7 +245,7 @@ const Tetris = () => {
 				</Row>
 		<Container className='container-fluid'>
 				<Row className=' d-flex justify-content-center text-info '>
-					<div className='my-1'>You will have more fun with control of Tetris when you try it on PC</div>
+					<div className='my-1'>You'll have more fun with arrow key on keyboard</div>
 					<div className='w-100'></div>
 					<Small className=''>Use the arrow keys on the keyboard</Small>
 				</Row>
